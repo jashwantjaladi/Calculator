@@ -1,28 +1,6 @@
-let a, b, operator;
+
 let previousvalue = "";
-let cuurentValue=""
-function add()
-{
-    
-    return a+b;
-}
-
-function subtract()
-{
-    
-    return a-b;
-}
-
-function multiply()
-{
-    return a*b;
-}
-
-function divide()
-{
-    return a/b;
-}
-let previous = document.querySelector(".prev-text")
+let cuurentValue= ""
 let displaytext = document.querySelector(".display-text")
 let number = document.querySelectorAll(".number");
 number.forEach((item) =>
@@ -35,20 +13,31 @@ number.forEach((item) =>
     })
 })
 
+function handlenumbers(sum)
+{
+ if(cuurentValue.length<=5)
+ {
+    cuurentValue+=sum;
+ }   
+}
+
 let operators = document.querySelectorAll(".operators")
 operators.forEach((otheritem) =>
 {
 otheritem.addEventListener("click",function(e)
     {
-        handlenumbers(otheritem.innerHTML)
-        displaytext.textContent= cuurentValue;
+        handleoperator(otheritem.innerHTML)
+        displaytext.textContent= operator;
     })
 })
 
-function handlenumbers(sum)
+function handleoperator(op)
 {
-    cuurentValue +=sum;
+operator =op;
+previousvalue+=cuurentValue;
+cuurentValue=""
 }
+
 
 let brackets=document.querySelectorAll(".brackets")
 brackets.forEach((bracketitems) =>
@@ -65,21 +54,47 @@ clear.addEventListener("click", function(e)
 {
    displaytext.textContent=""
    cuurentValue=""
+   previousvalue=""
 })
 
 let equals = document.querySelector(".equals")
 equals.addEventListener("click", function(e)
 {
-    operate();
+   displaytext.textContent= operate();
 })
 
 function operate()
 {
-cuurentValue=number(cuurentValue);
-previousvalue=number(previousvalue);
+cuurentValue=Number(cuurentValue);
+previousvalue=Number(previousvalue);
 
-if (otheritem==="+")
+if(operator==="+")
 {
-    previousvalue+=cuurentValue;
+        sum = previousvalue+cuurentValue;
+        return sum;
+}else if(operator==="-")
+{
+    diff=previousvalue-cuurentValue;
+    return diff;
+}else if(operator==="x")
+{
+    mul = previousvalue*cuurentValue;
+    return mul
+}else if(operator==="/")
+{
+    divide = previousvalue/cuurentValue;
+    return divide;
+}else if(operator==="%")
+{
+    remainder = previousvalue%cuurentValue;
+    return remainder;
 }
+let undo = document.getElementById("undo")
+undo.addEventListener("click", function(e)
+{
+    console.log(cuurentValue.slice(0,-1));
+    
+})
+
+
 }
