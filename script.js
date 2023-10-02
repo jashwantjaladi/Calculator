@@ -63,7 +63,8 @@ brackets.forEach((bracketitems) =>
 let clear = document.getElementById("clear")
 clear.addEventListener("click", function(e)
 {
-    displaytext.textContent= previous;
+   displaytext.textContent=""
+   cuurentValue=""
 })
 
 let equals = document.querySelector(".equals")
@@ -72,3 +73,13 @@ equals.addEventListener("click", function(e)
     operate();
 })
 
+function operate()
+{
+cuurentValue=number(cuurentValue);
+previousvalue=number(previousvalue);
+
+if (otheritem==="+")
+{
+    previousvalue+=cuurentValue;
+}
+}
